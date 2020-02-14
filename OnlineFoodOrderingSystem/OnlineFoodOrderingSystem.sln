@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineFoodOrderingSystem", "OnlineFoodOrderingSystem\OnlineFoodOrderingSystem.csproj", "{66C3CB49-6E1F-4C43-8ED2-F0E58D0FA2B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{0AFCE255-9216-4788-99FF-6292B9F9024D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66C3CB49-6E1F-4C43-8ED2-F0E58D0FA2B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66C3CB49-6E1F-4C43-8ED2-F0E58D0FA2B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66C3CB49-6E1F-4C43-8ED2-F0E58D0FA2B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66C3CB49-6E1F-4C43-8ED2-F0E58D0FA2B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AFCE255-9216-4788-99FF-6292B9F9024D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AFCE255-9216-4788-99FF-6292B9F9024D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AFCE255-9216-4788-99FF-6292B9F9024D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AFCE255-9216-4788-99FF-6292B9F9024D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1875725-19C5-4831-BAC2-C66D8B47EE8A}
+	EndGlobalSection
+EndGlobal
