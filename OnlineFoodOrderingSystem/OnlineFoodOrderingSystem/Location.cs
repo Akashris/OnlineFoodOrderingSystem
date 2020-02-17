@@ -33,7 +33,6 @@ namespace OnlineFoodOrderingSystem
         }
         public void DisplayLocation(List<string> Location_name)
         {
-
             Console.WriteLine("PLease Enter Ur Current Location\n ");
 
             int location_count = 1;

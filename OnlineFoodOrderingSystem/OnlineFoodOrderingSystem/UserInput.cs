@@ -15,20 +15,20 @@ namespace OnlineFoodOrderingSystem
             {
                 try
                 {
-                    Console.Write("\nEnter Your Choice\t");
+                    Console.Write("\n\tEnter Your Choice\t");
                     User_Input = Convert.ToInt32(Console.ReadLine());
                     if (User_Input <= 0)
                     {
-                        Console.WriteLine("\nEnter a Positive or Non Zero Input");
+                        Console.WriteLine("\n\tEnter a Positive or Non Zero Input");
                     }
                     if (User_Input > MyListCount)
                     {
-                        Console.WriteLine("\nEnter The Correct Option");
+                        Console.WriteLine("\n\tEnter The Correct Option");
                     }
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("\nEnter a Valid Input");
+                    Console.WriteLine("\n\tEnter a Valid Input");
                 }
             }
             return User_Input;

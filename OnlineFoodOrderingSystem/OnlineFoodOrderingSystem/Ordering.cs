@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OnlineFoodOrderingSystem
 {
-    class Ordering
+    public class Ordering
     {
-        public static List<string> AddOrderItems(string UserRestaurant, List<string> User_FoodOrders, int _Total_Price)
+        public static List<string> DisplayOrderItems(string UserRestaurant, List<string> User_FoodOrders, int _Total_Price)
         {
             Food foodObj = new Food();
             List<string> Food_name = foodObj.GetFood(UserRestaurant);
@@ -19,21 +19,23 @@ namespace OnlineFoodOrderingSystem
                 Console.WriteLine("{0}.) {1}", Food_count, result);
                 Food_count++;
             }
+            return Food_name;
+        }
 
-            int User_Food_input = OnlineFoodOrderingSystem.UserInput.UserInputValidation(Food_name.Count());
-
-            User_FoodOrders.Add(Food_name[User_Food_input - 1]);
+        public static List<string> AddOrderItems(string UserFood, List<string> User_FoodOrders)
+        {      
+            User_FoodOrders.Add(UserFood);
 
             return User_FoodOrders;
         }
 
-        public static List<string> DeleteOrderItems(string UserLocation, string UserRestaurant, List<string> User_FoodOrders, int _Total_Price)
+        public static List<string> DisplayDeleteOrderItems(string UserLocation, string UserRestaurant, List<string> User_FoodOrders, int _Total_Price)
         {
-          
+
             List<string> Delete_FoodOrders = User_FoodOrders.ToList();
             Console.WriteLine("\n");
             Console.WriteLine("Your Food Items Are");
-            
+
             List<string> Duplicate_User_FoodOrders = User_FoodOrders.ToList();
             int Count, IndexNumber = 1;
 
@@ -63,13 +65,14 @@ namespace OnlineFoodOrderingSystem
                     Console.WriteLine(" {0}. {1}\t x{2}", IndexNumber++, Duplicate_User_FoodOrders[LoopIndex], Count);
                 }
             }
+            return Duplicate_User_FoodOrders;
+        }
 
-            int Item_Delete_Index = OnlineFoodOrderingSystem.UserInput.UserInputValidation(Duplicate_User_FoodOrders.Count());
-
-            User_FoodOrders.Remove(Duplicate_User_FoodOrders[Item_Delete_Index - 1]);
+        public static List<string> RemoveOrderItems(List<string> User_FoodOrders,string deleteFood)
+        { 
+            User_FoodOrders.Remove(deleteFood);
             Console.WriteLine("\t\t\t\t\t Item Removed SUCESSFULLY");
             Console.WriteLine("\nYour Cart Is");
-
             return User_FoodOrders;
         }
 
