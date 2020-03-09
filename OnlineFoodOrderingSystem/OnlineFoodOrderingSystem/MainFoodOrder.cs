@@ -14,47 +14,47 @@ namespace OnlineFoodOrderingSystem
 {
     class MainFoodOrder
     {
-        public static void ViewCart(string UserLocation, string UserRestaurant, List<string> User_FoodOrders, int _Total_Price)
+        public static void ViewCart(string userLocation, string UserRestaurant, List<string> userFoodOrders, int totalPrice)
         {
-            List<string> Duplicate_User_FoodOrders = User_FoodOrders.ToList();
+            List<string> duplicateUserFoodOrders = userFoodOrders.ToList();
             Console.WriteLine("\t\t\t\t\t         ___/^");
             Console.WriteLine("\t\t\t\t\t        |__/  - Your Cart");
             Console.WriteLine("\t\t\t\t\t        O O");
             Console.WriteLine("\n\t\t\t\t\t-----------------------------------");
             Console.WriteLine("\t\t\t\t\t Restaurant Name : {0}", UserRestaurant);
-            Console.WriteLine("\t\t\t\t\t Location        : {0}", UserLocation);
+            Console.WriteLine("\t\t\t\t\t Location        : {0}", userLocation);
 
             Console.WriteLine("\t\t\t\t\t You Have Ordered The Following:-\n");
-            int Count, IndexNumber = 1;
+            int count, indexNumber = 1;
 
-            if (Duplicate_User_FoodOrders.Count == 1)
+            if (duplicateUserFoodOrders.Count == 1)
             {
-                Console.Write("\t\t\t\t\t {0}. {1}\t\t", IndexNumber++, Duplicate_User_FoodOrders[0]);
-                Console.Write("x{0}\n", Duplicate_User_FoodOrders.Count);
+                Console.Write("\t\t\t\t\t {0}. {1}\t\t", indexNumber++, duplicateUserFoodOrders[0]);
+                Console.Write("x{0}\n", duplicateUserFoodOrders.Count);
             }
             else
             {
-                for (int LoopIndex = 0; LoopIndex < Duplicate_User_FoodOrders.Count; LoopIndex++)
+                for (int loopIndex = 0; loopIndex < duplicateUserFoodOrders.Count; loopIndex++)
                 {
-                    Count = 1;
-                    for (int TraverseIndex = LoopIndex + 1; TraverseIndex < Duplicate_User_FoodOrders.Count; TraverseIndex++)
+                    count = 1;
+                    for (int traverseIndex = loopIndex + 1; traverseIndex < duplicateUserFoodOrders.Count; traverseIndex++)
                     {
-                        if (Duplicate_User_FoodOrders[LoopIndex] == Duplicate_User_FoodOrders[TraverseIndex])
+                        if (duplicateUserFoodOrders[loopIndex] == duplicateUserFoodOrders[traverseIndex])
                         {
-                            Count = Count + 1;
-                            Duplicate_User_FoodOrders.RemoveAt(TraverseIndex);
-                            TraverseIndex = LoopIndex;
+                            count = count + 1;
+                            duplicateUserFoodOrders.RemoveAt(traverseIndex);
+                            traverseIndex = loopIndex;
                         }
                         else
                         {
                             continue;
                         }
                     }
-                    Console.Write("\t\t\t\t\t {0}. {1}\t\t", IndexNumber++, Duplicate_User_FoodOrders[LoopIndex]);
-                    Console.Write("x{0}\n",Count);
+                    Console.Write("\t\t\t\t\t {0}. {1}\t\t", indexNumber++, duplicateUserFoodOrders[loopIndex]);
+                    Console.Write("x{0}\n", count);
                 }
             }
-            Console.WriteLine("\n\t\t\t\t\t Amount To Pay   : {0} /- RS\n", _Total_Price);
+            Console.WriteLine("\n\t\t\t\t\t Amount To Pay   : {0} /- RS\n", totalPrice);
             Console.WriteLine("\t\t\t\t\t\tTHANKS FOR ORDERING");
             Console.WriteLine("\n\t\t\t\t\t-----------------------------------");
         }
@@ -76,68 +76,138 @@ namespace OnlineFoodOrderingSystem
             Console.WriteLine("\t\t\t\t\t **** WELCOME TO TOMATO :)  ****\n");
             Console.WriteLine("\n");
             CustomerDetails customer = new CustomerDetails();
-            List<CustomerDetails> customerDetail_List = new List<CustomerDetails>();
+            List<CustomerDetails> customerDetailList = new List<CustomerDetails>();
+
             Console.Write("\tUSERNAME :  ");
-            String Customer_Name;           
-            Customer_Name = Console.ReadLine();
-            customer.SetName(Customer_Name);
+            String customerName;
+            customerName = Console.ReadLine();
+            customer.SetName(customerName);
+
             Console.WriteLine("\n");
 
             Location loc = new Location();
-            List<string> Location_name = loc.GetLocation();
-            loc.DisplayLocation(Location_name);
-            int User_Location_input = OnlineFoodOrderingSystem.UserInput.UserInputValidation(Location_name.Count()); 
+            List<string> locationName = loc.GetLocation();
+            loc.DisplayLocation(locationName);
+            int userLocationInput = OnlineFoodOrderingSystem.UserInput.UserInputValidation(locationName.Count()); 
             
-            var re_order="yes";
-            while (re_order == "yes")
+            var reOrder="yes";
+            while (reOrder == "yes")
             {
-                List<string> Restaurant_Name = OnlineFoodOrderingSystem.Restaurant.ChooseRestaurant(Location_name[User_Location_input-1]);
-                List<string> Food_Name = new List<string>();
-                int User_Restaurant_input = OnlineFoodOrderingSystem.UserInput.UserInputValidation(Restaurant_Name.Count());
-                int _Total_Price = 0;
-                List<string> User_FoodOrders = new List<string>();
-                List<string> Delete_UserOrders = new List<string>();
-                var yesOrNo = "yes";
+                List<string> restaurantName = OnlineFoodOrderingSystem.Restaurant.ChooseRestaurant(locationName[userLocationInput - 1]);
+                List<string> foodName = new List<string>();
+                int userRestaurantInput = OnlineFoodOrderingSystem.UserInput.UserInputValidation(restaurantName.Count());
+                int totalPrice = 0;
+                List<string> userFoodOrders = new List<string>();
+                List<string> deleteUserOrders = new List<string>();
+                int inputCheck;
+                string yesOrNo = "yes";
                 while (yesOrNo == "yes")
                 {
                     while (yesOrNo == "yes")
                     {
-                        Food_Name= OnlineFoodOrderingSystem.Ordering.DisplayOrderItems(Restaurant_Name[User_Restaurant_input - 1], User_FoodOrders, _Total_Price);
-                        int User_Food_input = OnlineFoodOrderingSystem.UserInput.UserInputValidation(Food_Name.Count());
-                        User_FoodOrders = OnlineFoodOrderingSystem.Ordering.AddOrderItems(Food_Name[User_Food_input-1],User_FoodOrders);
+                        foodName = OnlineFoodOrderingSystem.Ordering.DisplayOrderItems(restaurantName[userRestaurantInput - 1], userFoodOrders, totalPrice);
+                        int User_Food_input = OnlineFoodOrderingSystem.UserInput.UserInputValidation(foodName.Count());
+                        userFoodOrders = OnlineFoodOrderingSystem.Ordering.AddOrderItems(foodName[User_Food_input-1], userFoodOrders);
 
                         
-                        int Food_Price = OnlineFoodOrderingSystem.Food.FoodPrice(Restaurant_Name[User_Restaurant_input - 1], User_FoodOrders, _Total_Price);
-                        _Total_Price = OnlineFoodOrderingSystem.Food.CalculateTotalPrice(Food_Price, _Total_Price);
+                        int Food_Price = OnlineFoodOrderingSystem.Food.FoodPrice(restaurantName[userRestaurantInput - 1], userFoodOrders, totalPrice);
+                        totalPrice = OnlineFoodOrderingSystem.Food.CalculateTotalPrice(Food_Price, totalPrice);
 
-                        ViewCart(Location_name[User_Location_input - 1], Restaurant_Name[User_Restaurant_input - 1], User_FoodOrders, _Total_Price);
-                        Console.Write("\n\tDo You Wish To Order More - YES (OR) NO ?  ");
+                        ViewCart(locationName[userLocationInput - 1], restaurantName[userRestaurantInput - 1], userFoodOrders, totalPrice);
+                        inputCheck = 0;
+                        while (inputCheck == 0)
+                        {
+                            try
+                            {
+                                Console.Write("\n\tDo You Wish To Order More - YES (OR) NO ?  ");
+                                yesOrNo = Console.ReadLine();
+                                yesOrNo = yesOrNo.ToLower();
+                                if (yesOrNo != "yes"&& yesOrNo != "no")
+                                {
+                                    Console.WriteLine("\n\t Please Type the Word Yes or No Fully");
 
-                        yesOrNo = Convert.ToString(Console.ReadLine());
-                        yesOrNo = yesOrNo.ToLower();
+                                }
+                                else
+                                {
+                                    inputCheck = 1;
+                                }
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("\n\tEnter a Valid Input");
+
+                            }
+                        }
 
                     }
 
-                    ViewCart(Location_name[User_Location_input - 1], Restaurant_Name[User_Restaurant_input - 1], User_FoodOrders, _Total_Price);
+                    ViewCart(locationName[userLocationInput - 1], restaurantName[userRestaurantInput - 1], userFoodOrders, totalPrice);
 
-                    Console.Write("\n\tDo You Want To Delete Items From Your Cart?   YES (OR) NO  ");
-                    yesOrNo = Convert.ToString(Console.ReadLine());
-                    yesOrNo = yesOrNo.ToLower();
+                    inputCheck = 0;
+                    while (inputCheck == 0)
+                    {
+                        try
+                        {
+                            Console.Write("\n\tDo You Want To Delete Items From Your Cart?   YES (OR) NO  ");
+                            yesOrNo = Console.ReadLine();
+                            yesOrNo = yesOrNo.ToLower();
+                            if (yesOrNo != "yes" && yesOrNo != "no")
+                            {
+                                Console.WriteLine("\n\t Please Type the Word Yes or No Fully");
+
+                            }
+                            else
+                            {
+                                inputCheck = 1;
+                            }
+                        }
+                        catch(FormatException)
+                        {
+                            Console.WriteLine("\n\tEnter a Valid Input");
+                            
+                        }
+                    }
+
+                    
 
                     while (yesOrNo == "yes")
                     {
-                        Delete_UserOrders = OnlineFoodOrderingSystem.Ordering.DisplayDeleteOrderItems(Location_name[User_Location_input - 1], Restaurant_Name[User_Restaurant_input - 1], User_FoodOrders, _Total_Price);
-                        int Item_Delete_Index = OnlineFoodOrderingSystem.UserInput.UserInputValidation(Delete_UserOrders.Count());
-                        User_FoodOrders = OnlineFoodOrderingSystem.Ordering.RemoveOrderItems(User_FoodOrders, Delete_UserOrders[Item_Delete_Index-1]);
+                        deleteUserOrders = OnlineFoodOrderingSystem.Ordering.DisplayDeleteOrderItems(locationName[userLocationInput - 1], restaurantName[userRestaurantInput - 1], userFoodOrders, totalPrice);
+                        int itemDeleteIndex = OnlineFoodOrderingSystem.UserInput.UserInputValidation(deleteUserOrders.Count());
+                        userFoodOrders = OnlineFoodOrderingSystem.Ordering.RemoveOrderItems(userFoodOrders, deleteUserOrders[itemDeleteIndex - 1]);
 
 
-                        int Temp_Price = OnlineFoodOrderingSystem.Food.CalculateReduceFoodPrice(Restaurant_Name[User_Restaurant_input - 1], User_FoodOrders, _Total_Price);
-                        _Total_Price = OnlineFoodOrderingSystem.Food.ReduceFoodPrice(Temp_Price, _Total_Price);
-                        if (_Total_Price > 0)
+                        int tempPrice = OnlineFoodOrderingSystem.Food.CalculateReduceFoodPrice(restaurantName[userRestaurantInput - 1], userFoodOrders, totalPrice);
+                        totalPrice = OnlineFoodOrderingSystem.Food.ReduceFoodPrice(tempPrice, totalPrice);
+                        if (totalPrice > 0)
                         {
-                            ViewCart(Location_name[User_Location_input - 1], Restaurant_Name[User_Restaurant_input - 1], User_FoodOrders, _Total_Price);
-                            Console.Write("\n\tDo You Want To Alter Your Cart Again?   YES (OR) NO  ");
-                            yesOrNo = Convert.ToString(Console.ReadLine());
+                            ViewCart(locationName[userLocationInput - 1], restaurantName[userRestaurantInput - 1], userFoodOrders, totalPrice);
+
+
+                            inputCheck = 0;
+                            while (inputCheck == 0)
+                            {
+                                try
+                                {
+                                    Console.Write("\n\tDo You Want To Alter Your Cart Again?   YES (OR) NO  ");
+                                    yesOrNo = Console.ReadLine();
+                                    yesOrNo = yesOrNo.ToLower();
+                                    if (yesOrNo != "yes" && yesOrNo != "no")
+                                    {
+                                        Console.WriteLine("\n\t Please Type the Word Yes or No Fully");
+
+                                    }
+                                    else
+                                    {
+                                        inputCheck = 1;
+                                    }
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine("\n\tEnter a Valid Input");
+
+                                }
+                            }
                         }
                         else
                         {
@@ -145,31 +215,53 @@ namespace OnlineFoodOrderingSystem
                             goto OrderAgain;
                         }
                     }
-                    Console.Write("\n\tDo You Wish To Add Items?  YES (OR) NO  ");
-                    yesOrNo = Convert.ToString(Console.ReadLine());
+                    inputCheck = 0;
+                    while (inputCheck == 0)
+                    {
+                        try
+                        {
+                            Console.Write("\n\tDo You Wish To Add Items?  YES (OR) NO  ");
+                            yesOrNo = Console.ReadLine();
+                            yesOrNo = yesOrNo.ToLower();
+                            if (yesOrNo != "yes" && yesOrNo != "no")
+                            {
+                                Console.WriteLine("\n\t Please Type the Word Yes or No Fully");
+
+                            }
+                            else
+                            {
+                                inputCheck = 1;
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("\n\tEnter a Valid Input");
+
+                        }
+                    }
                 }
                 Payment paymentObject = new Payment();
-                List<string> Payment_Type = paymentObject.PaymentMethod();
+                List<string> paymentType = paymentObject.PaymentMethod();
 
-                int User_Payment_input = OnlineFoodOrderingSystem.UserInput.UserInputValidation(Payment_Type.Count());
-                string UserPaymentMethod = paymentObject.get_PaymentMethod(Payment_Type,User_Payment_input);
+                int userPaymentInput = OnlineFoodOrderingSystem.UserInput.UserInputValidation(paymentType.Count());
+                string userPaymentMethod = paymentObject.get_PaymentMethod(paymentType, userPaymentInput);
                 Console.WriteLine("\n");
                 Console.WriteLine("\t\t\t\t\t    ()  ()");
                 Console.WriteLine("\t\t\t\t\t    .    .  Thank You For Using TOMATO ");
                 Console.WriteLine("\t\t\t\t\t     '..'");
   
-                int User_Feedback = -1;
-                while (User_Feedback <= 0 || User_Feedback > 10)
+                int userFeedback = -1;
+                while (userFeedback <= 0 || userFeedback > 10)
                 {
                     try
                     {
                         Console.Write("\n\t\t\t\tPlease Enter Your Feedback Out Of 10- \t");
-                        User_Feedback = Convert.ToInt32(Console.ReadLine());
-                        if (User_Feedback <= 0)
+                        userFeedback = Convert.ToInt32(Console.ReadLine());
+                        if (userFeedback <= 0)
                         {
                             Console.WriteLine("\n\tEnter a Positive or Non Zero Input");
                         }
-                        if (User_Feedback > 10)
+                        if (userFeedback > 10)
                         {
                             Console.WriteLine("\n\tEnter The Correct Option");
                         }
@@ -180,22 +272,45 @@ namespace OnlineFoodOrderingSystem
                     }
                 }
 
-                customer.SetFeedback(User_Feedback);
-                customerDetail_List.Add(customer);
-                customer.Add_Customer_Details_In_Database(customerDetail_List, Location_name[User_Location_input - 1], Restaurant_Name[User_Restaurant_input - 1], User_FoodOrders, _Total_Price, UserPaymentMethod);
+                customer.SetFeedback(userFeedback);
+                customerDetailList.Add(customer);
+                customer.AddCustomerDetailsInDatabase(customerDetailList, locationName[userLocationInput - 1], restaurantName[userRestaurantInput - 1], userFoodOrders, totalPrice, userPaymentMethod);
                 Console.WriteLine("\n\t\t\t\t\tPress Any Key To Continue");
                 Console.ReadKey();
                 OrderAgain:
                 {
-                    Console.WriteLine("\nDo You Wish To Place A New Order ?  YES (or) NO");
-                    re_order = Console.ReadLine();
-                    re_order.ToLower();
+                    inputCheck = 0;
+                    while (inputCheck == 0)
+                    {
+                        try
+                        {
+                            Console.WriteLine("\nDo You Wish To Place A New Order ?  YES (or) NO");
+                            reOrder = Console.ReadLine();
+                            reOrder.ToLower();
+                            if (reOrder != "yes" && reOrder != "no")
+                            {
+                                Console.WriteLine("\n\t Please Type the Word Yes or No Fully");
+
+                            }
+                            else
+                            {
+                                inputCheck = 1;
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("\n\tEnter a Valid Input");
+
+                        }
+                    }
                 }
             }
             Console.WriteLine("\t\t\t\t\t    ()  ()");
             Console.WriteLine("\t\t\t\t\t    .    .  Thank You For Using TOMATO ");
             Console.WriteLine("\t\t\t\t\t     '..'");
         }
+
+
         
     }
 }

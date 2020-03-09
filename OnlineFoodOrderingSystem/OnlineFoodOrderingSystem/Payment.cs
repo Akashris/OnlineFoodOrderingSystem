@@ -10,19 +10,19 @@ namespace OnlineFoodOrderingSystem
     {
         public List<string> PaymentMethod()
         {
-            List<string> Payment_Type = new List<string>() { "Online Payment", "Cash On Delivery" };
+            List<string> paymentType = new List<string>() { "Online Payment", "Cash On Delivery" };
             Console.Write("\n\tPlease Choose Your Payment Method ");
             int index = 1;
-            foreach (var result in Payment_Type)
+            foreach (var result in paymentType)
             {
                 Console.WriteLine("\n{0}.{1}", index++, result);
             }
-            return Payment_Type;
+            return paymentType;
         }
 
-        public string get_PaymentMethod(List<string>Payment_Type, int User_Payment_input)
+        public string get_PaymentMethod(List<string> paymentType, int userPaymentInput)
         {
-            return Payment_Type[User_Payment_input - 1];
+            return paymentType[userPaymentInput - 1];
         }
         
     }

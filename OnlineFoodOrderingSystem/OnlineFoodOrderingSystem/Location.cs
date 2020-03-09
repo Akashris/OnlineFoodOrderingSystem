@@ -17,30 +17,30 @@ namespace OnlineFoodOrderingSystem
 
         public List<string> GetLocation()
         {
-            List<string> Name = new List<string>();
+            List<string> name = new List<string>();
             string connection = GetConnection();
             SqlConnection conn = new SqlConnection(connection);
             conn.Open();
             SqlCommand cmd = new SqlCommand("SELECT LOCATION_NAME FROM [FoodOrder].[dbo].[Location] ", conn);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
-            {     
-                Name.Add(reader.GetString(0));
+            {
+                name.Add(reader.GetString(0));
             }
             reader.Close();
             conn.Close();
-            return Name;
+            return name;
         }
-        public void DisplayLocation(List<string> Location_name)
+        public void DisplayLocation(List<string> locationName)
         {
             Console.WriteLine("PLease Enter Ur Current Location\n ");
 
-            int location_count = 1;
+            int locationCount = 1;
 
-            foreach (var result in Location_name)
+            foreach (var result in locationName)
             {
-                Console.WriteLine("\t{0}.) {1}", location_count, result);
-                location_count++;
+                Console.WriteLine("\t{0}.) {1}", locationCount, result);
+                locationCount++;
             }
         }
     }

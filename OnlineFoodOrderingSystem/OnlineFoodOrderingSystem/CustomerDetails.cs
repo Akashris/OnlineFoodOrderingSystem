@@ -9,33 +9,33 @@ namespace OnlineFoodOrderingSystem
 {
     class CustomerDetails
     {
-        public string Customer_Name;
-        public int Customer_Feedback;
+        public string customer_Name;
+        public int customer_Feedback;
 
-        public void SetName(string CustomerName)
+        public void SetName(string customerName)
         {
-            Customer_Name = CustomerName;
+            customer_Name = customerName;
         }
         public string getName()
         {
-            return Customer_Name;
+            return customer_Name;
         }
-        public void SetFeedback(int CustomerFeedback)
+        public void SetFeedback(int customerFeedback)
         {
-            Customer_Feedback = CustomerFeedback;
+            customer_Feedback = customerFeedback;
         }
 
         public int getFeedback()
         {
-            return Customer_Feedback;
+            return customer_Feedback;
         }
 
-        public void Add_Customer_Details_In_Database(List<CustomerDetails> customerDetail_List, string LocationName, string UserRestaurant, List<string> User_FoodOrders, int _Total_Price, string UserPaymentMethod)
+        public void AddCustomerDetailsInDatabase(List<CustomerDetails> customerDetailList, string locationName, string userRestaurant, List<string> userFoodOrders, int totalPrice, string userPaymentMethod)
         {
             string Connection = OnlineFoodOrderingSystem.Location.GetConnection();
             SqlConnection conn = new SqlConnection(Connection);
             conn.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO Customer_Details (CUSTOMER_NAME,CUSTOMER_FEEDBACK,LOCATION_NAME,RESTAURANT_NAME,FOOD_NAME,FOOD_PRICE,PAYMENT_METHOD) VALUES('" + getName()+ "','" + getFeedback() + "','" + LocationName+ "','"+UserRestaurant+ "','"+string.Join(",",User_FoodOrders)+ "'," + _Total_Price+ ",'" + UserPaymentMethod + "')", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO Customer_Details (CUSTOMER_NAME,CUSTOMER_FEEDBACK,LOCATION_NAME,RESTAURANT_NAME,FOOD_NAME,FOOD_PRICE,PAYMENT_METHOD) VALUES('" + getName()+ "','" + getFeedback() + "','" + locationName + "','"+userRestaurant+ "','"+string.Join(",",userFoodOrders)+ "'," + totalPrice+ ",'" + userPaymentMethod + "')", conn);
             int i = cmd.ExecuteNonQuery();
             while (i!=0)
             {

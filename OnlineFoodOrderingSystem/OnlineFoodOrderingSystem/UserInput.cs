@@ -8,20 +8,20 @@ namespace OnlineFoodOrderingSystem
 {
     class UserInput
     {
-        public static int UserInputValidation(int MyListCount)
+        public static int UserInputValidation(int myListCount)
         {
-            int User_Input = -1;
-            while (User_Input <= 0 || User_Input > MyListCount)
+            int userInput = -1;
+            while (userInput <= 0 || userInput > myListCount)
             {
                 try
                 {
                     Console.Write("\n\tEnter Your Choice\t");
-                    User_Input = Convert.ToInt32(Console.ReadLine());
-                    if (User_Input <= 0)
+                    userInput = Convert.ToInt32(Console.ReadLine());
+                    if (userInput <= 0)
                     {
                         Console.WriteLine("\n\tEnter a Positive or Non Zero Input");
                     }
-                    if (User_Input > MyListCount)
+                    if (userInput > myListCount)
                     {
                         Console.WriteLine("\n\tEnter The Correct Option");
                     }
@@ -31,7 +31,7 @@ namespace OnlineFoodOrderingSystem
                     Console.WriteLine("\n\tEnter a Valid Input");
                 }
             }
-            return User_Input;
+            return userInput;
         }
     }
 }

@@ -8,72 +8,72 @@ namespace OnlineFoodOrderingSystem
 {
     public class Ordering
     {
-        public static List<string> DisplayOrderItems(string UserRestaurant, List<string> User_FoodOrders, int _Total_Price)
+        public static List<string> DisplayOrderItems(string userRestaurant, List<string> userFoodOrders, int totalPrice)
         {
             Food foodObj = new Food();
-            List<string> Food_name = foodObj.GetFood(UserRestaurant);
+            List<string> foodName = foodObj.GetFood(userRestaurant);
 
-            int Food_count = 1;
-            foreach (var result in Food_name)
+            int foodCount = 1;
+            foreach (var result in foodName)
             {
-                Console.WriteLine("{0}.) {1}", Food_count, result);
-                Food_count++;
+                Console.WriteLine("{0}.) {1}", foodCount, result);
+                foodCount++;
             }
-            return Food_name;
+            return foodName;
         }
 
-        public static List<string> AddOrderItems(string UserFood, List<string> User_FoodOrders)
-        {      
-            User_FoodOrders.Add(UserFood);
+        public static List<string> AddOrderItems(string userFood, List<string> userFoodOrders)
+        {
+            userFoodOrders.Add(userFood);
 
-            return User_FoodOrders;
+            return userFoodOrders;
         }
 
-        public static List<string> DisplayDeleteOrderItems(string UserLocation, string UserRestaurant, List<string> User_FoodOrders, int _Total_Price)
+        public static List<string> DisplayDeleteOrderItems(string userLocation, string userRestaurant, List<string> userFoodOrders, int totalPrice)
         {
 
-            List<string> Delete_FoodOrders = User_FoodOrders.ToList();
+            //List<string> deleteFoodOrders = userFoodOrders.ToList();
             Console.WriteLine("\n");
             Console.WriteLine("Your Food Items Are");
 
-            List<string> Duplicate_User_FoodOrders = User_FoodOrders.ToList();
-            int Count, IndexNumber = 1;
+            List<string> duplicateUserFoodOrders = userFoodOrders.ToList();
+            int count, indexNumber = 1;
 
-            if (Duplicate_User_FoodOrders.Count == 1)
+            if (duplicateUserFoodOrders.Count == 1)
             {
-                Console.WriteLine(" {0}. {1}\t x{2}", IndexNumber++, Duplicate_User_FoodOrders[0], Duplicate_User_FoodOrders.Count);
+                Console.WriteLine(" {0}. {1}\t x{2}", indexNumber++, duplicateUserFoodOrders[0], duplicateUserFoodOrders.Count);
             }
             else
             {
-                for (int LoopIndex = 0; LoopIndex < Duplicate_User_FoodOrders.Count; LoopIndex++)
+                for (int loopIndex = 0; loopIndex < duplicateUserFoodOrders.Count; loopIndex++)
                 {
-                    Count = 1;
+                    count = 1;
 
-                    for (int TraverseIndex = LoopIndex + 1; TraverseIndex < Duplicate_User_FoodOrders.Count; TraverseIndex++)
+                    for (int traverseIndex = loopIndex + 1; traverseIndex < duplicateUserFoodOrders.Count; traverseIndex++)
                     {
-                        if (Duplicate_User_FoodOrders[LoopIndex] == Duplicate_User_FoodOrders[TraverseIndex])
+                        if (duplicateUserFoodOrders[loopIndex] == duplicateUserFoodOrders[traverseIndex])
                         {
-                            Count = Count + 1;
-                            Duplicate_User_FoodOrders.RemoveAt(TraverseIndex);
-                            TraverseIndex = LoopIndex;
+                            count = count + 1;
+                            duplicateUserFoodOrders.RemoveAt(traverseIndex);
+                            traverseIndex = loopIndex;
                         }
                         else
                         {
                             continue;
                         }
                     }
-                    Console.WriteLine(" {0}. {1}\t x{2}", IndexNumber++, Duplicate_User_FoodOrders[LoopIndex], Count);
+                    Console.WriteLine(" {0}. {1}\t x{2}", indexNumber++, duplicateUserFoodOrders[loopIndex], count);
                 }
             }
-            return Duplicate_User_FoodOrders;
+            return duplicateUserFoodOrders;
         }
 
-        public static List<string> RemoveOrderItems(List<string> User_FoodOrders,string deleteFood)
-        { 
-            User_FoodOrders.Remove(deleteFood);
+        public static List<string> RemoveOrderItems(List<string> userFoodOrders, string deleteFood)
+        {
+            userFoodOrders.Remove(deleteFood);
             Console.WriteLine("\t\t\t\t\t Item Removed SUCESSFULLY");
             Console.WriteLine("\nYour Cart Is");
-            return User_FoodOrders;
+            return userFoodOrders;
         }
 
     }

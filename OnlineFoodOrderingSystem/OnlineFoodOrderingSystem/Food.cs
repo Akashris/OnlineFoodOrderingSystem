@@ -9,69 +9,69 @@ namespace OnlineFoodOrderingSystem
 {
     public class Food
     {
-        public List<string> GetFood(String RestaurantName)
+        public List<string> GetFood(String restaurantName)
         {
-            String UserRestaurant = RestaurantName;
-            List<string> Name = new List<string>();
+            String userRestaurant = restaurantName;
+            List<string> name = new List<string>();
             string Connection = OnlineFoodOrderingSystem.Location.GetConnection();
             SqlConnection conn = new SqlConnection(Connection);
             conn.Open();
-            SqlCommand cmd = new SqlCommand("SELECT FOOD_NAME FROM [FoodOrder].[dbo].[Food] WHERE RESTAURANT_NAME= '" + UserRestaurant + "'ORDER BY FOOD_NAME", conn);
+            SqlCommand cmd = new SqlCommand("SELECT FOOD_NAME FROM [FoodOrder].[dbo].[Food] WHERE RESTAURANT_NAME= '" + userRestaurant + "'ORDER BY FOOD_NAME", conn);
             SqlDataReader reader = cmd.ExecuteReader();
             Console.WriteLine("\n\t\t\tThe MENU \n");
             while (reader.Read())
             {
-                Name.Add(reader.GetString(0));
+                name.Add(reader.GetString(0));
             }
             reader.Close();
             conn.Close();
-            return Name;
+            return name;
         }
 
-        public static int FoodPrice(string UserRestaurant, List<string> User_FoodOrders, int _Total_Price)
+        public static int FoodPrice(string userRestaurant, List<string> userFoodOrders, int totalPrice)
         {
 
             string Connection = OnlineFoodOrderingSystem.Location.GetConnection();
             SqlConnection conn = new SqlConnection(Connection);
             conn.Open();
-            SqlCommand cmd = new SqlCommand("SELECT FOOD_PRICE FROM [FoodOrder].[dbo].[Food] WHERE RESTAURANT_NAME='" + UserRestaurant + "' AND FOOD_NAME='" + User_FoodOrders[User_FoodOrders.Count - 1] + "'", conn);
+            SqlCommand cmd = new SqlCommand("SELECT FOOD_PRICE FROM [FoodOrder].[dbo].[Food] WHERE RESTAURANT_NAME='" + userRestaurant + "' AND FOOD_NAME='" + userFoodOrders[userFoodOrders.Count - 1] + "'", conn);
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
-            int Food_Price = reader.GetInt32(0);
+            int foodPrice = reader.GetInt32(0);
             reader.Close();
             conn.Close();
-            return Food_Price;
+            return foodPrice;
         }
-        public static int CalculateTotalPrice(int Food_Price,int _Total_Price)
+        public static int CalculateTotalPrice(int foodPrice, int totalPrice)
         {
-            _Total_Price = _Total_Price + Food_Price;
-            return _Total_Price;
+            totalPrice = totalPrice + foodPrice;
+            return totalPrice;
         }
 
-        public static int CalculateReduceFoodPrice(string UserRestaurant, List<string> User_FoodOrders, int _Total_Price)
+        public static int CalculateReduceFoodPrice(string userRestaurant, List<string> userFoodOrders, int totalPrice)
         {
-            int Temp_Price = 0;
+            int tempPrice = 0;
             string Connection = OnlineFoodOrderingSystem.Location.GetConnection();
             SqlConnection conn = new SqlConnection(Connection);
             conn.Open();
-            foreach (var result in User_FoodOrders)
+            foreach (var result in userFoodOrders)
             {
-                SqlCommand cmd = new SqlCommand("SELECT FOOD_PRICE FROM [FoodOrder].[dbo].[Food] WHERE RESTAURANT_NAME='" + UserRestaurant + "' AND FOOD_NAME='" + result + "'", conn);
+                SqlCommand cmd = new SqlCommand("SELECT FOOD_PRICE FROM [FoodOrder].[dbo].[Food] WHERE RESTAURANT_NAME='" + userRestaurant + "' AND FOOD_NAME='" + result + "'", conn);
                 SqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
-                Temp_Price = Temp_Price + reader.GetInt32(0);
+                tempPrice = tempPrice + reader.GetInt32(0);
                 reader.Close();
                
             }
             conn.Close();
-            return Temp_Price;
+            return tempPrice;
         }
 
-        public static int ReduceFoodPrice(int Temp_Price, int _Total_Price)
+        public static int ReduceFoodPrice(int tempPrice, int totalPrice)
         { 
-            int _Delete_Price = _Total_Price - Temp_Price;
-            _Total_Price = _Total_Price - _Delete_Price;
-            return _Total_Price;
+            int deletePrice = totalPrice - tempPrice;
+            totalPrice = totalPrice - deletePrice;
+            return totalPrice;
         }
     }
 }
