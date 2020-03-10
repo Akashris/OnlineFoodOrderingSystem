@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineFoodOrderingSystem
+﻿namespace OnlineFoodOrderingSystem
 {
+    using System;
+    using System.Collections.Generic;
+
+
     public class Payment
     {
         public List<string> PaymentMethod()
@@ -24,6 +22,6 @@ namespace OnlineFoodOrderingSystem
         {
             return paymentType[userPaymentInput - 1];
         }
-        
+
     }
 }

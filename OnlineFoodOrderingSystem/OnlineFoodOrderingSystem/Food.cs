@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineFoodOrderingSystem
+﻿namespace OnlineFoodOrderingSystem
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+
+
     public class Food
     {
         public List<string> GetFood(String restaurantName)
         {
             String userRestaurant = restaurantName;
             List<string> name = new List<string>();
-            string Connection = OnlineFoodOrderingSystem.Location.GetConnection();
+            string Connection = OnlineFoodOrderingSystem.ConnectionClass.GetConnection();
             SqlConnection conn = new SqlConnection(Connection);
             conn.Open();
             SqlCommand cmd = new SqlCommand("SELECT FOOD_NAME FROM [FoodOrder].[dbo].[Food] WHERE RESTAURANT_NAME= '" + userRestaurant + "'ORDER BY FOOD_NAME", conn);
@@ -31,7 +29,7 @@ namespace OnlineFoodOrderingSystem
         public static int FoodPrice(string userRestaurant, List<string> userFoodOrders, int totalPrice)
         {
 
-            string Connection = OnlineFoodOrderingSystem.Location.GetConnection();
+            string Connection = OnlineFoodOrderingSystem.ConnectionClass.GetConnection();
             SqlConnection conn = new SqlConnection(Connection);
             conn.Open();
             SqlCommand cmd = new SqlCommand("SELECT FOOD_PRICE FROM [FoodOrder].[dbo].[Food] WHERE RESTAURANT_NAME='" + userRestaurant + "' AND FOOD_NAME='" + userFoodOrders[userFoodOrders.Count - 1] + "'", conn);
@@ -51,7 +49,7 @@ namespace OnlineFoodOrderingSystem
         public static int CalculateReduceFoodPrice(string userRestaurant, List<string> userFoodOrders, int totalPrice)
         {
             int tempPrice = 0;
-            string Connection = OnlineFoodOrderingSystem.Location.GetConnection();
+            string Connection = OnlineFoodOrderingSystem.ConnectionClass.GetConnection();
             SqlConnection conn = new SqlConnection(Connection);
             conn.Open();
             foreach (var result in userFoodOrders)
@@ -61,14 +59,14 @@ namespace OnlineFoodOrderingSystem
                 reader.Read();
                 tempPrice = tempPrice + reader.GetInt32(0);
                 reader.Close();
-               
+
             }
             conn.Close();
             return tempPrice;
         }
 
         public static int ReduceFoodPrice(int tempPrice, int totalPrice)
-        { 
+        {
             int deletePrice = totalPrice - tempPrice;
             totalPrice = totalPrice - deletePrice;
             return totalPrice;

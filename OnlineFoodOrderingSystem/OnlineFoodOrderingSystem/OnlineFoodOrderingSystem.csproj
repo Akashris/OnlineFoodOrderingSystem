@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionClass.cs" />
     <Compile Include="CustomerDetails.cs" />
     <Compile Include="Food.cs" />
     <Compile Include="Location.cs" />
@@ -53,7 +54,9 @@
     <Compile Include="UserInput.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

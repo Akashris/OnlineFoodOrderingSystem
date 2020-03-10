@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineFoodOrderingSystem
+﻿namespace OnlineFoodOrderingSystem
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+
+
     public class Restaurant
     {
         public List<string> GetRestaurant(string locationName)
         {
             string userLocation = locationName;
             List<string> name = new List<string>();
-            string Connection = OnlineFoodOrderingSystem.Location.GetConnection();
+            string Connection = OnlineFoodOrderingSystem.ConnectionClass.GetConnection();
             SqlConnection conn = new SqlConnection(Connection);
             conn.Open();
             SqlCommand cmd = new SqlCommand("SELECT RESTAURANT_NAME FROM [FoodOrder].[dbo].[Restaurant] WHERE LOCATION_NAME= '" + userLocation + "' ORDER BY RATING", conn);

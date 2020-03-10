@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineFoodOrderingSystem
+﻿namespace OnlineFoodOrderingSystem
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+
     public class Ordering
     {
         public static List<string> DisplayOrderItems(string userRestaurant, List<string> userFoodOrders, int totalPrice)
@@ -32,7 +31,6 @@ namespace OnlineFoodOrderingSystem
         public static List<string> DisplayDeleteOrderItems(string userLocation, string userRestaurant, List<string> userFoodOrders, int totalPrice)
         {
 
-            //List<string> deleteFoodOrders = userFoodOrders.ToList();
             Console.WriteLine("\n");
             Console.WriteLine("Your Food Items Are");
 

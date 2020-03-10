@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineFoodOrderingSystem
+﻿namespace OnlineFoodOrderingSystem
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+
     class CustomerDetails
     {
         public string customer_Name;
@@ -32,18 +29,18 @@ namespace OnlineFoodOrderingSystem
 
         public void AddCustomerDetailsInDatabase(List<CustomerDetails> customerDetailList, string locationName, string userRestaurant, List<string> userFoodOrders, int totalPrice, string userPaymentMethod)
         {
-            string Connection = OnlineFoodOrderingSystem.Location.GetConnection();
+            string Connection = OnlineFoodOrderingSystem.ConnectionClass.GetConnection();
             SqlConnection conn = new SqlConnection(Connection);
             conn.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO Customer_Details (CUSTOMER_NAME,CUSTOMER_FEEDBACK,LOCATION_NAME,RESTAURANT_NAME,FOOD_NAME,FOOD_PRICE,PAYMENT_METHOD) VALUES('" + getName()+ "','" + getFeedback() + "','" + locationName + "','"+userRestaurant+ "','"+string.Join(",",userFoodOrders)+ "'," + totalPrice+ ",'" + userPaymentMethod + "')", conn);
+            SqlCommand cmd = new SqlCommand("INSERT INTO Customer_Details (CUSTOMER_NAME,CUSTOMER_FEEDBACK,LOCATION_NAME,RESTAURANT_NAME,FOOD_NAME,FOOD_PRICE,PAYMENT_METHOD) VALUES('" + getName() + "','" + getFeedback() + "','" + locationName + "','" + userRestaurant + "','" + string.Join(",", userFoodOrders) + "'," + totalPrice + ",'" + userPaymentMethod + "')", conn);
             int i = cmd.ExecuteNonQuery();
-            while (i!=0)
+            while (i != 0)
             {
                 Console.WriteLine("\n\t\t\t\t\tORDER PLACED SUCESSFULLY");
                 break;
             }
             conn.Close();
- 
+
         }
     }
 }

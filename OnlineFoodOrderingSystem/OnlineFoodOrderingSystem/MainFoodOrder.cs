@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using System.Configuration;
-using OnlineFoodOrderingSystem;
-
-namespace OnlineFoodOrderingSystem
+﻿namespace OnlineFoodOrderingSystem
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+
     class MainFoodOrder
     {
         public static void ViewCart(string userLocation, string UserRestaurant, List<string> userFoodOrders, int totalPrice)
@@ -23,7 +16,6 @@ namespace OnlineFoodOrderingSystem
             Console.WriteLine("\n\t\t\t\t\t-----------------------------------");
             Console.WriteLine("\t\t\t\t\t Restaurant Name : {0}", UserRestaurant);
             Console.WriteLine("\t\t\t\t\t Location        : {0}", userLocation);
-
             Console.WriteLine("\t\t\t\t\t You Have Ordered The Following:-\n");
             int count, indexNumber = 1;
 
@@ -88,9 +80,9 @@ namespace OnlineFoodOrderingSystem
             Location loc = new Location();
             List<string> locationName = loc.GetLocation();
             loc.DisplayLocation(locationName);
-            int userLocationInput = OnlineFoodOrderingSystem.UserInput.UserInputValidation(locationName.Count()); 
-            
-            var reOrder="yes";
+            int userLocationInput = OnlineFoodOrderingSystem.UserInput.UserInputValidation(locationName.Count());
+
+            var reOrder = "yes";
             while (reOrder == "yes")
             {
                 List<string> restaurantName = OnlineFoodOrderingSystem.Restaurant.ChooseRestaurant(locationName[userLocationInput - 1]);
@@ -107,9 +99,9 @@ namespace OnlineFoodOrderingSystem
                     {
                         foodName = OnlineFoodOrderingSystem.Ordering.DisplayOrderItems(restaurantName[userRestaurantInput - 1], userFoodOrders, totalPrice);
                         int User_Food_input = OnlineFoodOrderingSystem.UserInput.UserInputValidation(foodName.Count());
-                        userFoodOrders = OnlineFoodOrderingSystem.Ordering.AddOrderItems(foodName[User_Food_input-1], userFoodOrders);
+                        userFoodOrders = OnlineFoodOrderingSystem.Ordering.AddOrderItems(foodName[User_Food_input - 1], userFoodOrders);
 
-                        
+
                         int Food_Price = OnlineFoodOrderingSystem.Food.FoodPrice(restaurantName[userRestaurantInput - 1], userFoodOrders, totalPrice);
                         totalPrice = OnlineFoodOrderingSystem.Food.CalculateTotalPrice(Food_Price, totalPrice);
 
@@ -122,7 +114,7 @@ namespace OnlineFoodOrderingSystem
                                 Console.Write("\n\tDo You Wish To Order More - YES (OR) NO ?  ");
                                 yesOrNo = Console.ReadLine();
                                 yesOrNo = yesOrNo.ToLower();
-                                if (yesOrNo != "yes"&& yesOrNo != "no")
+                                if (yesOrNo != "yes" && yesOrNo != "no")
                                 {
                                     Console.WriteLine("\n\t Please Type the Word Yes or No Fully");
 
@@ -161,14 +153,14 @@ namespace OnlineFoodOrderingSystem
                                 inputCheck = 1;
                             }
                         }
-                        catch(FormatException)
+                        catch (FormatException)
                         {
                             Console.WriteLine("\n\tEnter a Valid Input");
-                            
+
                         }
                     }
 
-                    
+
 
                     while (yesOrNo == "yes")
                     {
@@ -249,7 +241,7 @@ namespace OnlineFoodOrderingSystem
                 Console.WriteLine("\t\t\t\t\t    ()  ()");
                 Console.WriteLine("\t\t\t\t\t    .    .  Thank You For Using TOMATO ");
                 Console.WriteLine("\t\t\t\t\t     '..'");
-  
+
                 int userFeedback = -1;
                 while (userFeedback <= 0 || userFeedback > 10)
                 {
@@ -311,7 +303,7 @@ namespace OnlineFoodOrderingSystem
         }
 
 
-        
+
     }
 }
         
